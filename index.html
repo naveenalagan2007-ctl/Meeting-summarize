@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting notes summarization</title>
+    <!-- Modern Typography: Inter & Noto Sans Tamil -->
+    <link crossorigin="anonymous" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css?v=4">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 15C13.6569 15 15 13.6569 15 12V6C15 4.34315 13.6569 3 12 3C10.3431 3 9 4.34315 9 6V12C9 13.6569 10.3431 15 12 15Z" fill="url(#paint0_linear)"/>
+                    <path d="M19 10V12C19 15.866 15.866 19 12 19M5 10V12C5 15.866 8.13401 19 12 19M12 19V22M8 22H16" stroke="url(#paint0_linear)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                        <linearGradient id="paint0_linear" x1="5" y1="3" x2="19" y2="22" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#00F0FF" />
+                            <stop offset="1" stop-color="#5500FF" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <h1>Meeting notes summarization</h1>
+            </div>
+            <p class="subtitle">AI-ஆதரவு குரல் கண்டறிதல் மற்றும் உரைமாற்றம்</p>
+        </header>
+
+        <!-- Main Upload Section -->
+        <main class="main-card glass-panel">
+            <form id="upload-form" class="upload-section">
+                <label for="audio-upload" class="upload-area" id="drop-zone">
+                    <div class="upload-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                        </svg>
+                    </div>
+                    <h3>ஆடியோ ஃபைலை பதிவேற்றவும்</h3>
+                    <p>MP3, WAV, M4A ஃபைல்களை (50MB வரை) ஆதரிக்கிறது</p>
+                    <span id="file-name-display" class="file-name"></span>
+                    <input type="file" id="audio-upload" accept="audio/*" required hidden>
+                </label>
+
+                <div class="api-input">
+                    <input type="password" id="api-key" placeholder="OpenRouter API திறவுகோல் (sk-or-...)" class="glass-input" required>
+                </div>
+
+                <!-- Error Message Container -->
+                <div id="error-message" class="error-msg hidden"></div>
+
+                <button type="submit" id="transcribe-btn" class="primary-btn" disabled>
+                    <span>ஆடியோவை உரைமாற்று</span>
+                    <div class="spinner hidden" id="btn-spinner"></div>
+                </button>
+            </form>
+        </main>
+
+        <!-- Processing State UI -->
+        <div id="loading-state" class="loading-container hidden glass-panel">
+            <div class="pulse-ring"></div>
+            <h2 class="animate-text">ஆடியோ உரைமாற்றப்படுகிறது...</h2>
+            <p>பேச்சாளர்களை பகுப்பாய்வு செய்து உரையை பிரித்தெடுக்கிறது. இதற்கு சில நிமிடங்கள் ஆகலாம்.</p>
+        </div>
+
+        <!-- Transcript Output Section -->
+        <section id="transcript-section" class="transcript-section hidden">
+            <div class="export-actions" id="export-actions">
+                <button id="export-txt-btn" class="export-btn">TXT பதிவிறக்கு</button>
+                <button id="export-md-btn" class="export-btn">MD பதிவிறக்கு</button>
+            </div>
+
+            <div id="transcript-exportable-area">
+                <div id="raw-transcript-container" class="raw-transcript glass-panel hidden" style="margin-bottom: 1.5rem;">
+                    <h3 class="summary-title">📝 மூல உரை (Raw Transcript)</h3>
+                    <p id="raw-transcript-text" style="white-space: pre-wrap; margin-top: 1rem;"></p>
+                </div>
+
+                <div id="overall-summary-container" class="overall-summary glass-panel">
+                    <h3 class="summary-title">📊 ஒட்டுமொத்த சுருக்கம்</h3>
+                    <p id="overall-summary-text"></p>
+                </div>
+
+                <div id="action-items-container" class="action-items-container glass-panel hidden" style="margin-top: 1.5rem;">
+                    <h3 class="summary-title">✅ செயல் உருப்படிகள்</h3>
+                    <ul id="action-items-list" class="action-items-list">
+                        <!-- Action items injected here -->
+                    </ul>
+                </div>
+
+                <div class="transcript-header" style="margin-top: 1.5rem;">
+                    <h2>உரைமாற்ற முடிவு</h2>
+                </div>
+                <div id="transcript-container" class="transcript-container glass-panel scrollable">
+                    <!-- Utterance cards injected here -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="/static/script.js?v=4"></script>
+</body>
+</html>
