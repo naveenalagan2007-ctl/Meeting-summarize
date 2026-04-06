@@ -12,7 +12,7 @@ import re
 app = FastAPI(title="Bilingual Audio Summarizer")
 
 # Provided by the user
-aai.settings.api_key = "f9f3827f4a6d49679648ffe38b313a43"
+aai.settings.api_key = "YOUR API KEY"
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
