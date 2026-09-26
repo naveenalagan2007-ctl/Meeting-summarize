@@ -30,20 +30,43 @@ The backend is built using **FastAPI**, while **AssemblyAI** handles audio trans
 
 ---
 
-✨ Core Features
-Feature	Description
-🎙️ Audio Upload	Upload a meeting recording directly through the web interface.
-🗣️ Speech-to-Text	Converts spoken audio into readable text using AssemblyAI.
-👥 Speaker Detection	Separates the conversation according to different speakers.
-🧠 AI Summarization	Produces a structured overall summary of the meeting.
-📋 Action Items	Extracts tasks and follow-up activities discussed during the meeting.
-👤 Speaker-wise Points	Groups the important contributions of each speaker.
-🌐 Tamil Output	Generates the processed meeting information in Tamil.
-📄 Raw Transcript	Displays the original speaker-labelled transcript.
-📥 TXT Export	Allows users to download the processed meeting information as TXT.
-📝 Markdown Export	Allows users to save the results as Markdown.
-🖱️ Drag & Drop	Audio files can be selected or dragged into the upload area.
-📱 Responsive Interface	Designed as a browser-based user interface.
+## ✨ Core Features
+
+### 🎙️ Audio Upload
+Upload a recorded meeting directly through the web interface.
+
+### 🗣️ Speech-to-Text
+Convert meeting speech into readable text using AssemblyAI.
+
+### 👥 Speaker Detection
+Identify and separate different speakers in the meeting.
+
+### 🧠 AI Summarization
+Generate a clear and structured summary of the complete meeting.
+
+### 📋 Action Items
+Automatically identify important tasks and follow-up activities.
+
+### 👤 Speaker-wise Points
+Organize important discussion points according to each speaker.
+
+### 🌐 Tamil Output
+Generate the processed meeting information in Tamil for easier understanding.
+
+### 📄 Raw Transcript
+View the complete speaker-labelled transcript of the meeting.
+
+### 📥 TXT Export
+Download the processed meeting information as a text file.
+
+### 📝 Markdown Export
+Save the meeting results in Markdown format.
+
+### 🖱️ Drag & Drop
+Select or drag an audio file directly into the upload area.
+
+### 📱 Responsive Interface
+Simple and user-friendly browser-based interface.
 
 The current frontend includes audio upload, a 50 MB upload indication, OpenRouter API-key input, processing status, raw transcript, summary, action items, and TXT/Markdown export controls.
 
@@ -334,16 +357,9 @@ Development planning
 👨‍💻 Author
 Naveen Alagan
 
-B.Tech Information Technology
-
-GitHub:
-
-https://github.com/naveenalagan2007-ctl
-
-Project:
-
-https://github.com/naveenalagan2007-ctl/Meeting-summarize
 
 📜 License
 
 This project is developed for educational and project purposes.
+                                 🎙️ Meeting Summarize
+                               Listen Less. Understand More.
