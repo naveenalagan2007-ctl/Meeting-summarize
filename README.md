@@ -47,71 +47,63 @@ Feature	Description
 
 The current frontend includes audio upload, a 50 MB upload indication, OpenRouter API-key input, processing status, raw transcript, summary, action items, and TXT/Markdown export controls.
 
-🏗️ System Architecture
-                          ┌───────────────────────┐
-                         │         USER          │
-                         │                       │
-                         │   Upload Meeting      │
-                         │       Audio           │
-                         └───────────┬───────────┘
-                                     │
-                                     ▼
-                         ┌───────────────────────┐
-                         │    WEB INTERFACE      │
-                         │                       │
-                         │ HTML + CSS + JS       │
-                         └───────────┬───────────┘
-                                     │
-                              HTTP POST Request
-                                     │
-                                     ▼
-                         ┌───────────────────────┐
-                         │       FASTAPI         │
-                         │       BACKEND         │
-                         │                       │
-                         │ /api/transcribe       │
-                         └───────────┬───────────┘
-                                     │
-                                     ▼
-                         ┌───────────────────────┐
-                         │      ASSEMBLYAI       │
-                         │                       │
-                         │ Speech Recognition    │
-                         │ Speaker Labels        │
-                         └───────────┬───────────┘
-                                     │
-                                  Transcript
-                                     │
-                                     ▼
-                         ┌───────────────────────┐
-                         │      OPENROUTER       │
-                         │                       │
-                         │ AI Meeting Analysis   │
-                         └───────────┬───────────┘
-                                     │
-                   ┌─────────────────┼─────────────────┐
-                   │                 │                 │
-                   ▼                 ▼                 ▼
-             ┌───────────┐    ┌────────────┐    ┌──────────────┐
-             │  Overall  │    │   Action   │    │   Speaker    │
-             │  Summary  │    │   Items    │    │   Points     │
-             └─────┬─────┘    └─────┬──────┘    └──────┬───────┘
-                   │                │                  │
-                   └────────────────┼──────────────────┘
-                                    │
-                                    ▼
-                         ┌───────────────────────┐
-                         │     TAMIL OUTPUT      │
-                         │                       │
-                         │ Structured Results    │
-                         └───────────┬───────────┘
-                                     │
-                                     ▼
-                         ┌───────────────────────┐
-                         │         USER          │
-                         │                       │
-                         │ View / Download       │
-                         └───────────────────────┘
+   ## 🏗️ System Architecture
+
+```text
+┌───────────────┐
+│     USER      │
+└───────┬───────┘
+        │
+        │ Upload Meeting Audio
+        ▼
+┌───────────────────────────┐
+│      WEB INTERFACE        │
+│       HTML + CSS + JS     │
+└─────────────┬─────────────┘
+              │
+              │ HTTP POST
+              ▼
+┌───────────────────────────┐
+│          FASTAPI          │
+│          BACKEND          │
+│      /api/transcribe      │
+└─────────────┬─────────────┘
+              │
+              │ Audio
+              ▼
+┌───────────────────────────┐
+│        ASSEMBLYAI         │
+│                           │
+│  Speech-to-Text           │
+│  Speaker Identification   │
+└─────────────┬─────────────┘
+              │
+              │ Transcript
+              ▼
+┌───────────────────────────┐
+│        OPENROUTER         │
+│      AI PROCESSING        │
+└─────────────┬─────────────┘
+              │
+       ┌──────┼──────┐
+       │      │      │
+       ▼      ▼      ▼
+   ┌──────┐ ┌──────┐ ┌──────────┐
+   │Summary│ │Tasks │ │ Speakers │
+   └───┬──┘ └───┬──┘ └─────┬────┘
+       │        │          │
+       └────────┼──────────┘
+                ▼
+      ┌───────────────────┐
+      │    TAMIL OUTPUT   │
+      │ Structured Result │
+      └─────────┬─────────┘
+                │
+                ▼
+      ┌───────────────────┐
+      │       USER        │
+      │  View / Download  │
+      └───────────────────┘
 
 🔄 Application Workflow
 Step 1 — Select Meeting Audio
@@ -282,6 +274,8 @@ Technology	Role
 The FastAPI application mounts static resources, serves the HTML interface, and exposes the transcription endpoint.
 
 📁 Project Structure
+
+```text
 Meeting-summarize/
 │
 ├── app.py
@@ -291,8 +285,7 @@ Meeting-summarize/
 │   └── Main web interface
 │
 ├── script.js
-│   └── Frontend interaction,
-│       upload handling and API communication
+│   └── Frontend JavaScript
 │
 ├── style.css
 │   └── Application styling
@@ -301,13 +294,10 @@ Meeting-summarize/
 │   └── Python dependencies
 │
 ├── static/
-│   └── Frontend static resources
+│   └── Static resources
 │
-├── README.md
-│   └── Project documentation
-│
-└── __pycache__/
-    └── Python generated cache files
+└── README.md
+    └── Project documentation
 
 The repository currently contains the main application files including app.py, index.html, script.js, style.css, and requirements.txt.
 
